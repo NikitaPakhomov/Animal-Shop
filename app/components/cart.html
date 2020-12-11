@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/slave.css">
+    <link rel="stylesheet" href="./css/cart.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="cart-cont">
+        <header class="header">
+            <h1 class="header__h1">Ваша корзина</h1>
+            <button class="close"><img src="img\svg\close.svg" alt="close"></button>
+        </header>
+        <main class="cart">
+            <div class="cart__order">
+                <div class="cart__left">
+                    <input type="checkbox" class="checkbox" id="cart__checkbox-1" />
+                    <label for="cart__checkbox-1">Выбрать всё</label>
+                </div>
+                <div class="cart__right">
+                    <button class="trash-btn">Удалить всё<img src="img\svg\trashCan.svg" alt=""></button>
+                </div>
+            </div>
+
+            <article class="cart__orders">
+                <div class="cart__order">
+                    <div class="cart__left">
+                        <input type="checkbox" class="checkbox" id="cart__checkbox-2" />
+                        <label for="cart__checkbox-2"></label>
+                        <div class="cart__img-cont"><img src="./img/dogs/dog-1.png" alt="dogge" class="cart__img"></div>
+                        <span class="cart__name">Айну</span>
+                        <div class="btns-minplus">
+                            <button class="btn-minus">-</button>
+                            <input class="counter" value="1">
+                            <button class="btn-plus">+</button>
+                        </div>
+                    </div>
+                    <div class="cart__right">
+                        <div class="cart__cost">12 000₽</div>
+                        <button class="trash-btn"><img src="img\svg\trashCan.svg" alt=""></button>
+                    </div>
+                </div>
+                <div class="cart__order">
+                    <div class="cart__left">
+                        <input type="checkbox" class="checkbox" id="cart__checkbox-3" />
+                        <label for="cart__checkbox-3"></label>
+                        <div class="cart__img-cont"><img src="./img/dogs/dog-1.png" alt="dogge" class="cart__img"></div>
+                        <span class="cart__name">Афганская борзая</span>
+                        <div class="btns-minplus">
+                            <button class="btn-minus">-</button>
+                            <input class="counter" value="1">
+                            <button class="btn-plus">+</button>
+                        </div>
+                    </div>
+                    <div class="cart__right">
+                        <div class="cart__cost"> 15 000₽</div>
+                        <button class="trash-btn"><img src="img\svg\trashCan.svg" alt=""></button>
+                    </div>
+                </div>
+            </article>
+            <div class="cart__total">2 товара на сумму <span class="cart__cost">27 000₽</span></div>
+            <button class="btn-in-cart">Оформить заказ</button>
+        </main>
+    </div>
+</body>
+
+</html>

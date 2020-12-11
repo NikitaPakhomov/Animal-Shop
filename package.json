@@ -1,0 +1,19 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Pakhomov_Nikita@bitbucket.org/Pakhomov_Nikita/cft-js.git"
+  },
+  "author": "Nikita",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.13"
+  }
+}
