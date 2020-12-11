@@ -28,6 +28,12 @@
     z-index: -3;
 }
 
+/* -----------------------------breadcrumbs---------------- */
+
+.breadcrumbs {
+    display: none;
+}
+
 /* -----------------------------toggle-panel---------------- */
 
 .breadcrumbs {
