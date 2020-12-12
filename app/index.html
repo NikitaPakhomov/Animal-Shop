@@ -50,13 +50,17 @@
                     <div class="filters__name">Тип</div>
                     <ul class="filters__ul">
                         <li><input type="checkbox" class="checkbox" id="filters__checkbox-1" />
-                            <label for="filters__checkbox-1">Охотничьи</label></li>
+                            <label for="filters__checkbox-1">Охотничьи</label>
+                        </li>
                         <li><input type="checkbox" class="checkbox" id="filters__checkbox-2" />
-                            <label for="filters__checkbox-2">Компаньоны</label></li>
+                            <label for="filters__checkbox-2">Компаньоны</label>
+                        </li>
                         <li><input type="checkbox" class="checkbox" id="filters__checkbox-3" />
-                            <label for="filters__checkbox-3">Декоративные</label></li>
+                            <label for="filters__checkbox-3">Декоративные</label>
+                        </li>
                         <li><input type="checkbox" class="checkbox" id="filters__checkbox-4" />
-                            <label for="filters__checkbox-4">Служебные</label></li>
+                            <label for="filters__checkbox-4">Служебные</label>
+                        </li>
                     </ul>
                 </div>
                 <div class="filters__main-features">
@@ -89,102 +93,15 @@
             </aside>
 
             <article class="cards">
-                <div class="cards__item">
+
+                <template id="template">
                     <div class="cards__img-container">
-                        <img src="./img/dogs/dog-1.png" alt="dog" class="cards__img">
+                        <img src="" alt="dog" class="cards__img">
                     </div>
-                    <div class="cards__name">Айну</div>
-                    <div class="cards__cost">12 000₽</div>
+                    <div class="cards__name"></div>
+                    <div class="cards__cost"></div>
                     <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-2.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Афганская борзая</div>
-                    <div class="cards__cost">15 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-3.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Барбет</div>
-                    <div class="cards__cost">50 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-4.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Бассет</div>
-                    <div class="cards__cost">10 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-5.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Легавой</div>
-                    <div class="cards__cost">39 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-6.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Веттерхун</div>
-                    <div class="cards__cost">12 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-7.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Древера</div>
-                    <div class="cards__cost">17 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-8.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Ирландский терьер</div>
-                    <div class="cards__cost">15 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-9.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Амереканский кокер</div>
-                    <div class="cards__cost">10 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-10.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Английский Кокер</div>
-                    <div class="cards__cost">8 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-11.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Дункер</div>
-                    <div class="cards__cost">20 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
-                <div class="cards__item">
-                    <div class="cards__img-container">
-                        <img src="./img/dogs/dog-12.png" alt="dog" class="cards__img">
-                    </div>
-                    <div class="cards__name">Спаниель</div>
-                    <div class="cards__cost">5 000₽</div>
-                    <input type="button" class="btn-in-cart" value="В корзину">
-                </div>
+                </template>
             </article>
             <div class="btn-more-cont">
                 <button class="btn-more">Показать еще</button>
@@ -192,7 +109,8 @@
 
         </main>
     </div>
-    <script src="./js/jsTask2.js"></script>
+    <!-- <script src="./js/jsTask2.js"></script> -->
+    <script src="./js/js_lesson2.js"></script>
 </body>
 
 </html>
