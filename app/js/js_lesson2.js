@@ -46,10 +46,10 @@ function createElement({ img, name, cost }) {
     let elem = document.createElement('div');
     elem.classList.add('cards__item');
     elem.append(itemTemplate.content.cloneNode(true));
-    elem.children[0].children[0].src = `${img}`;
-    console.log(elem.children[0].children[0].src);
-    elem.children[1].textContent = `${name}`;
-    elem.children[2].textContent = `${cost}`;
+    elem.querySelector('.cards__img').src = `${img}`;
+    console.log(elem.querySelector('.cards__img').src);
+    elem.querySelector('.cards__name').textContent = `${name}`;
+    elem.querySelector('.cards__cost').textContent = `${cost}`;
     return elem;
 
 }
