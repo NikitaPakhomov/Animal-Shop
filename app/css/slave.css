@@ -275,7 +275,6 @@ ul {
 /* ----------------filters--------------*/
 
 .filters {
-    overflow-x: hidden;
     background-color: var(--form-grey);
     padding: 16px 23px;
 }
@@ -299,11 +298,11 @@ ul {
 .filteres__name:first-of-type::before {
     content: '';
     position: absolute;
-    bottom: -7px;
-    left: -40%;
-    width: 200%;
+    bottom: -14px;
+    width: 118%;
+    left: 50%;
+    transform: translateX(-50%);
     border-bottom: 1px solid var(--card-grey);
-    /* border-bottom: 1px solid greenyellow; */
 }
 
 .filters__name::after {
@@ -326,8 +325,9 @@ ul {
     content: '';
     position: absolute;
     bottom: -14px;
-    left: -40%;
-    width: 200%;
+    width: 118%;
+    left: 50%;
+    transform: translateX(-50%);
     border-bottom: 1px solid var(--card-grey);
 }
 

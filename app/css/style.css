@@ -120,11 +120,26 @@
 
 .filters {
     grid-column: span 3;
+    position: relative;
 }
 
 .btn-filter {
     display: none;
 }
+
+/* -----------------------------filters-to-JS---------------- */
+
+.filters__popup {
+    display: inline;
+    position: absolute;
+    left: 70px;
+    border: 1px solid blue;
+    white-space: nowrap;
+}
+
+#filters__count {}
+
+.filters__show-animals {}
 
 /* -----------------------------cards---------------- */
 

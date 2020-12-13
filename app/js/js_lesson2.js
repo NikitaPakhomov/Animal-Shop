@@ -138,6 +138,25 @@ function setData(elem, ...datas) {
     elem.dataset.devoted = datas[8];
 }
 
+//------------------for filters show btn -------------------------
+const btnShow = document.querySelector('.filters__show-animals');
+const foundCount = document.querySelector('#filters__count');
+const filter = document.querySelector('.filters')
+const filtersPopup = document.querySelector('.filters__popup')
 
 
+filter.addEventListener("click", () => findClickTarget(event))
 
+function findClickTarget(e) {
+    if (e.target.className == "checkbox") {
+        console.log('ok');
+    }
+    insertPopup(e.target)
+    return e.target;
+}
+function insertPopup(target) {
+    console.log(target.getBoundingClientRect().left);
+    console.log(filtersPopup.getBoundingClientRect().left);
+    filtersPopup.style.left = target.getBoundingClientRect().left + 20 + "px";
+    filtersPopup.style.top = pageYOffset + 20 + "px";
+}
