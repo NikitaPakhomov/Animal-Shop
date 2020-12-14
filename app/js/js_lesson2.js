@@ -146,16 +146,12 @@ function setData(elem, ...datas) {
     elem.dataset.devoted = datas[8];
 }
 
-//------------------for filters show btn -------------------------
-const btnShow = document.querySelector('.filters__show-animals');
+//------------------for filters popup -------------------------
 const foundCount = document.querySelector('#filters__count');
 const filter = document.querySelector('.filters');
 const filtersPopup = document.querySelector('.filters__popup');
 let filterTimer;
 let filtersActive = [];
-
-
-
 
 filter.addEventListener("click", () => findClickTarget(event))
 
@@ -164,23 +160,18 @@ function findClickTarget(e) {
     if (target.className == "checkbox") {
         filtersPopup.classList.remove('filters__popup_active')
         clearTimeout(filterTimer);
-
         if (target.checked) {
             filterTimer = setTimeout(() => insertPopup(target), 3000);
             filtersActive.push(target);
-
-
         } else {
             filtersPopup.classList.remove('filters__popup_active')
             if (filtersActive.includes(target)) {
                 console.log(filtersActive.indexOf(target));
                 console.log(target);
                 filtersActive.splice(filtersActive.indexOf(target), 1);
-
             }
             filterTimer = setTimeout(() => insertPopup(filtersActive[filtersActive.length - 1]), 3000);
         }
-        console.log(filtersActive[0].dataset);
     }
 }
 
@@ -195,5 +186,30 @@ function insertPopup(target) {
 }
 
 //------------------filtering-------------------------
+const btnShow = document.querySelector('.filters__show-animals');
 
+btnShow.addEventListener('click', (e) => {
+    e.preventDefault;
+    filtering();
+})
 
+function filtering() {
+    console.log(filtersActive);
+    for (let i = 0; i < filtersActive.length; i++) {
+        search(filtersActive[i].value);
+        console.log(filtersActive[i]);
+    }
+    // filtersActive.forEach((filter) => {
+    //     console.log(filter);
+    //     search(filter.value);
+    // })
+}
+
+function search(filterName) {
+    let items = itemsCont.children;
+    for (let i = 1; i < items.length; i++) {
+        if (items[i].dataset[filterName] == 0) {
+            items[i].classList.add('cards__item_none');
+        }
+    }
+}

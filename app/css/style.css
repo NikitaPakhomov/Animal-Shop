@@ -164,6 +164,10 @@
     border-radius: 4px;
 }
 
+.cards__item_none {
+    display: none;
+}
+
 .cards__item:hover .cards__name {
     color: var(--main-color);
 }
