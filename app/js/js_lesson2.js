@@ -141,22 +141,21 @@ function setData(elem, ...datas) {
 //------------------for filters show btn -------------------------
 const btnShow = document.querySelector('.filters__show-animals');
 const foundCount = document.querySelector('#filters__count');
-const filter = document.querySelector('.filters')
-const filtersPopup = document.querySelector('.filters__popup')
+const filter = document.querySelector('.filters');
+const filtersPopup = document.querySelector('.filters__popup');
+
 
 
 filter.addEventListener("click", () => findClickTarget(event))
 
 function findClickTarget(e) {
     if (e.target.className == "checkbox") {
-        console.log('ok');
+        let timer = setTimeout(() => insertPopup(e.target), 3000);
     }
-    insertPopup(e.target)
-    return e.target;
+
 }
+
 function insertPopup(target) {
-    console.log(target.getBoundingClientRect().left);
-    console.log(filtersPopup.getBoundingClientRect().left);
-    filtersPopup.style.left = target.getBoundingClientRect().left + 20 + "px";
-    filtersPopup.style.top = pageYOffset + 20 + "px";
+    filtersPopup.style.left = target.labels[0].getBoundingClientRect().width + 32 + 'px';
+    filtersPopup.style.top = target.labels[0].getBoundingClientRect().y - filter.getBoundingClientRect().y + "px";
 }
