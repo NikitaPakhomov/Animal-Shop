@@ -130,11 +130,15 @@
 /* -----------------------------filters-to-JS---------------- */
 
 .filters__popup {
-    display: inline;
+    display: none;
     position: absolute;
     left: 70px;
     border: 1px solid blue;
     white-space: nowrap;
+}
+
+.filters__popup_active {
+    display: inline;
 }
 
 #filters__count {}
