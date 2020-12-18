@@ -8,6 +8,7 @@ const filtersPopup = document.querySelector('.filters__popup');
 const filterTypes = document.querySelector('.filters__types').querySelector('.filters__ul');
 const filterFeatures = document.querySelector('.filters__main-features').querySelector('.filters__ul');
 const filterSize = document.querySelector('.filters__size').querySelector('.filters__inputs');
+const filterShowBtn = filtersPopup.querySelector('.filters__show-animals');
 let filteredDataCount;
 let filterTimer;
 let filtersActive = [];
@@ -21,7 +22,6 @@ function clearBoard() {
 }
 
 function toHTML(count, array) {
-    filteredDataCount = count;
     for (i = 0; i < count; i++) {
         // let elem = createElement(getInfo(array));
         let elem = createElement(array[i])
@@ -30,7 +30,7 @@ function toHTML(count, array) {
 }
 
 
-function createElement({ img, name, cost, hunt, companions, decorative, service, nofear, shedslittle, excellenthealth, goodobedience, devoted }) {
+function createElement({ img, name, cost }) {
     let elem = document.createElement('div');
     elem.classList.add('cards__item');
     elem.append(itemTemplate.content.cloneNode(true));
@@ -59,8 +59,29 @@ function findClickTarget(e) {
         clearTimeout(filterTimer);
         if (target.checked) {
             filterTimer = setTimeout(() => insertPopup(target), 3000);
+            filtersActive.push(target);
         } else {
             filtersPopup.classList.remove('filters__popup_active')
+            if (filtersActive.includes(target)) {
+                filtersActive.splice(filtersActive.indexOf(target), 1);
+            }
+            filterTimer = setTimeout(() => insertPopup(filtersActive[filtersActive.length - 1]), 3000);
+        }
+    }
+    if (target.className == "filters__input") {
+        filtersPopup.classList.remove('filters__popup_active')
+        clearTimeout(filterTimer);
+        console.log(target);
+        if (!target.checked) {
+            console.log('1');
+            filterTimer = setTimeout(() => insertPopup(filterSize), 3000);
+            filtersActive.push(filterSize);
+        } else {
+            console.log('2');
+            filtersPopup.classList.remove('filters__popup_active')
+            if (filtersActive.includes(filterSize)) {
+                filtersActive.splice(filtersActive.indexOf(filterSize), 1);
+            }
             filterTimer = setTimeout(() => insertPopup(filtersActive[filtersActive.length - 1]), 3000);
         }
     }
@@ -68,14 +89,23 @@ function findClickTarget(e) {
 
 function insertPopup(target) {
     foundCount.textContent = filteredDataCount;
-    if (target) {
+    if (target.className == "checkbox") {
         filtersPopup.style.left = target.labels[0].getBoundingClientRect().width + 32 + 'px';
         filtersPopup.style.top = target.labels[0].getBoundingClientRect().y - filter.getBoundingClientRect().y + "px";
         if (!filtersPopup.classList.contains('filters__popup_active')) {
             filtersPopup.classList.add('filters__popup_active');
         }
     }
+    if (target.className == "filters__inputs") {
+        filtersPopup.style.left = target.getBoundingClientRect().width + 32 + 'px';
+        filtersPopup.style.top = target.getBoundingClientRect().y - filter.getBoundingClientRect().y + "px";
+        if (!filtersPopup.classList.contains('filters__popup_active')) {
+            filtersPopup.classList.add('filters__popup_active');
+        }
+    }
 }
+
+
 
 // ------------------------------filtering------------------------------
 
@@ -85,95 +115,93 @@ filterTypes.addEventListener("change", () => filterByTypes(event));
 filterFeatures.addEventListener("change", () => filterByFeatures(event));
 filterSize.addEventListener("change", () => filterBySize(event));
 let filteredData = JSON.parse(JSON.stringify(data));
-let newData = [];
 let currentData = [];
+let min, max;
+
 
 function filterByTypes(e) {
     let target = e.target;
     if (target.tagName == 'INPUT') {
-        if (filterActiveFeatures.length == 0) {
-            newData = filteredData.slice();
-        }
         if (target.checked) {
             filterActiveTypes.push(target.value);
         } else {
             filterActiveTypes.splice(filterActiveTypes.indexOf(target.value), 1);
         }
-        newData = filteredData.filter(data => {
-            for (let i = 0; i < filterActiveTypes.length; i++) {
-                if (data[filterActiveTypes[i]] == 1) { return true }
-            }
-        })
-        currentData = newData.slice();
-        clearBoard();
-        toHTML(newData.length, newData);
     }
-
-
+    filtering();
 }
 
 function filterByFeatures(e) {
     let target = e.target;
-    let flag = false;
     if (target.tagName == 'INPUT') {
-        if (filterActiveTypes.length == 0) {
-            newData = filteredData.slice();
-        }
         if (target.checked) {
             filterActiveFeatures.push(target.value);
         } else {
             filterActiveFeatures.splice(filterActiveFeatures.indexOf(target.value), 1);
-            if (filterActiveFeatures.length === 0) { flag = true }
         }
-        newData = newData.filter(data => {
-            for (let i = 0; i < filterActiveFeatures.length; i++) {
-                console.log(data[filterActiveFeatures[i]]);
-                if (data[filterActiveFeatures[i]] != 1) {
-                    return flag;
-                }
-            }
-            return true;
-        })
-        currentData = newData.slice();
-        clearBoard();
-        toHTML(newData.length, newData);
     }
+    filtering();
 }
 
 function filterBySize(e) {
     let target = e.target;
-
     if (target.tagName == 'INPUT') {
-        if (filterActiveTypes.length == 0 && filterActiveFeatures.length == 0 && newData.length == 0) {
-            newData = filteredData.slice();
-        }
         if (target.name == 'filters__from') {
-            newData = newData.filter(data => {
-                let cost = +data.cost.replace(/\s/g, '');
-                if (target.value > cost) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            })
+            min = target.value;
         }
         if (target.name == 'filters__to') {
-            newData = newData.filter(data => {
-                let cost = +data.cost.replace(/\s/g, '');
-                if (target.value < cost) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            })
+            max = target.value;
         }
-        if (newData.length == 0 && target.value == '') {
-            newData = filteredData.slice();
-        }
-        currentData = newData.slice();
-        clearBoard();
-        toHTML(newData.length, newData);
     }
+    filtering();
 }
+
+function filtering() {
+    currentData = filteredData.slice();
+    if (filterActiveTypes.length != 0) {
+        currentData = currentData.filter(data => {
+            for (let i = 0; i < filterActiveTypes.length; i++) {
+                if (data[filterActiveTypes[i]] == 1) { return true }
+            }
+        })
+    }
+    if (filterActiveFeatures.length != 0) {
+        currentData = currentData.filter(data => {
+            for (let i = 0; i < filterActiveFeatures.length; i++) {
+                if (data[filterActiveFeatures[i]] != 1) {
+                    return false;
+                }
+            }
+            return true;
+        })
+    }
+    if (max && min) {
+        currentData = currentData.filter(data => {
+            let cost = +data.cost.replace(/\s/g, '');
+            if (min > cost) {
+                return false;
+            } else {
+                return true;
+            }
+        })
+        currentData = currentData.filter(data => {
+            let cost = +data.cost.replace(/\s/g, '');
+            if (max < cost) {
+                return false;
+            } else {
+                return true;
+            }
+        })
+    }
+    filteredDataCount = currentData.length;
+}
+function reshuffle() {
+    filtering();
+    clearBoard();
+    toHTML(currentData.length, currentData);
+}
+
+filterShowBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    reshuffle()
+})
