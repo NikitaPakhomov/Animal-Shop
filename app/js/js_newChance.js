@@ -13,7 +13,6 @@ let filterTimer;
 let filtersActive = [];
 let filterActiveTypes = [];
 let filterActiveFeatures = [];
-let filterActiveSize = [];
 
 toHTML(7, data);
 
@@ -87,27 +86,25 @@ filterFeatures.addEventListener("change", () => filterByFeatures(event));
 filterSize.addEventListener("change", () => filterBySize(event));
 let filteredData = JSON.parse(JSON.stringify(data));
 let newData = [];
+let currentData = [];
 
 function filterByTypes(e) {
     let target = e.target;
     if (target.tagName == 'INPUT') {
+        if (filterActiveFeatures.length == 0) {
+            newData = filteredData.slice();
+        }
         if (target.checked) {
             filterActiveTypes.push(target.value);
-            newData = filteredData.filter(data => {
-                for (let i = 0; i < filterActiveTypes.length; i++) {
-                    if (data[filterActiveTypes[i]] == 1) { return true }
-                }
-            })
-
         } else {
             filterActiveTypes.splice(filterActiveTypes.indexOf(target.value), 1);
-            newData = filteredData.filter(data => {
-                for (let i = 0; i < filterActiveTypes.length; i++) {
-                    if (data[filterActiveTypes[i]] == 1) { return true }
-                }
-            })
-
         }
+        newData = filteredData.filter(data => {
+            for (let i = 0; i < filterActiveTypes.length; i++) {
+                if (data[filterActiveTypes[i]] == 1) { return true }
+            }
+        })
+        currentData = newData.slice();
         clearBoard();
         toHTML(newData.length, newData);
     }
@@ -117,6 +114,7 @@ function filterByTypes(e) {
 
 function filterByFeatures(e) {
     let target = e.target;
+    let flag = false;
     if (target.tagName == 'INPUT') {
         if (filterActiveTypes.length == 0) {
             newData = filteredData.slice();
@@ -125,34 +123,57 @@ function filterByFeatures(e) {
             filterActiveFeatures.push(target.value);
         } else {
             filterActiveFeatures.splice(filterActiveFeatures.indexOf(target.value), 1);
+            if (filterActiveFeatures.length === 0) { flag = true }
         }
-
-        // if (newData.length == 0) {
-        //     newData = filteredData.filter(data => {
-        //         for (let i = 0; i < filterActiveFeatures.length; i++) {
-        //             if (data[filterActiveFeatures[i]] != 1) {
-        //                 return false;
-        //             }
-        //         }
-        //         return true;
-        //     })
-        // } else {
         newData = newData.filter(data => {
             for (let i = 0; i < filterActiveFeatures.length; i++) {
                 console.log(data[filterActiveFeatures[i]]);
                 if (data[filterActiveFeatures[i]] != 1) {
-                    return false;
+                    return flag;
                 }
             }
             return true;
         })
-        // }
-
+        currentData = newData.slice();
         clearBoard();
         toHTML(newData.length, newData);
     }
 }
 
 function filterBySize(e) {
-    console.log('filterBySize');
+    let target = e.target;
+
+    if (target.tagName == 'INPUT') {
+        if (filterActiveTypes.length == 0 && filterActiveFeatures.length == 0 && newData.length == 0) {
+            newData = filteredData.slice();
+        }
+        if (target.name == 'filters__from') {
+            newData = newData.filter(data => {
+                let cost = +data.cost.replace(/\s/g, '');
+                if (target.value > cost) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+            })
+        }
+        if (target.name == 'filters__to') {
+            newData = newData.filter(data => {
+                let cost = +data.cost.replace(/\s/g, '');
+                if (target.value < cost) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+            })
+        }
+        if (newData.length == 0 && target.value == '') {
+            newData = filteredData.slice();
+        }
+        currentData = newData.slice();
+        clearBoard();
+        toHTML(newData.length, newData);
+    }
 }
