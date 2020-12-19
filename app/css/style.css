@@ -157,7 +157,7 @@
 .cards__item {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: start;
     cursor: pointer;
     border: 1px solid var(--border-grey);
