@@ -9,6 +9,8 @@ const filterTypes = document.querySelector('.filters__types').querySelector('.fi
 const filterFeatures = document.querySelector('.filters__main-features').querySelector('.filters__ul');
 const filterSize = document.querySelector('.filters__size').querySelector('.filters__inputs');
 const filterShowBtn = filtersPopup.querySelector('.filters__show-animals');
+const cartBtn = document.querySelector('.header__ul').children[3].children[0];
+console.log(cartBtn);
 let filteredDataCount;
 let filterTimer;
 let filtersActive = [];
@@ -204,4 +206,29 @@ function reshuffle() {
 filterShowBtn.addEventListener('click', function (e) {
     e.preventDefault();
     reshuffle()
+    cart.cartArray = currentData.slice();
+    cart.calculating();
+    cart.htmlchange();
 })
+
+class Cart {
+    constructor(count, cost) {
+        this.count = count;
+        this.cost = cost;
+    }
+
+    cartArray = [];
+    calculating() {
+        this.count = this.cartArray.length;
+        for (let i = 0; i < this.count; i++) {
+            this.cost += +this.cartArray[i].cost.replace(/\s/g, '');
+        }
+        console.log(this.count, this.cost);
+    }
+    htmlchange() {
+        cartBtn.children[1].textContent = `Корзина (${this.count})
+        Цена: ${this.cost}`;
+    }
+}
+
+let cart = new Cart(0, 0);
