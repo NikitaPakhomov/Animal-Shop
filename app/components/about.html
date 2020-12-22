@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./css/slave.css">
-    <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="../css/slave.css">
+    <link rel="stylesheet" href="../css/about.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -14,7 +14,7 @@
 <body>
     <div class="wrapper">
         <header class="header">
-            <div class="header__logo"><img src="img/svg/logo.svg" alt="logo"></div>
+            <div class="header__logo"><a href="../index.html"><img src="../img/svg/logo.svg" alt="logo"></a></div>
             <div class="btn-catalog-container">
                 <input class="btn-catalog" type="button" value="Каталог">
                 <input class="btn-catalog" type="button" value="">
@@ -25,56 +25,64 @@
             </div>
             <nav class='header__nav'>
                 <ul class="header__ul">
-                    <li><button class='svg-btn'><img src="./img/svg/bonuses.svg" alt="Бонусы">Бонусы</button></li>
-                    <li><button class='svg-btn'><img src="./img/svg/orders.svg" alt="Заказы">Заказы</button></li>
-                    <li><button class='svg-btn'><img src="./img/svg/sales.svg" alt="Акции">Акции</button></li>
-                    <li><button class='svg-btn'><img src="./img/svg/cartWithDogs.svg" alt="Корзина">Корзина (5)</button>
+                    <li><button class='svg-btn'><img src="../img/svg/bonuses.svg" alt="Бонусы">Бонусы</button></li>
+                    <li><button class='svg-btn'><img src="../img/svg/orders.svg" alt="Заказы">Заказы</button></li>
+                    <li><button class='svg-btn'><img src="../img/svg/sales.svg" alt="Акции">Акции</button></li>
+                    <li><button class='svg-btn'><img src="../img/svg/cartWithDogs.svg" alt="Корзина">Корзина
+                            (5)</button>
                     </li>
                 </ul>
             </nav>
         </header>
         <main class="main about">
-            <h1 class="about__h1">Айну</h1>
-            <div class="breadcrumbs">Каталог товаров / Собачки / Айну</div>
-            <div class="about__img-cont"><img src="./img/dogs/dog-1.png" alt="dog" class="about__img"></div>
-            <div class="about__info">
-                <span class="about__h">Характеристика Айну</span>
-                <div class="about__features">
-                    <table class="about__table">
-                        <tbody class="about__tbody">
-                            <tr class="about__tr about__tr_bg">
-                                <th class="about__th">Тип</th>
-                                <td class="about__td">Охотничьи, Компаньоны</td>
-                            </tr>
-                            <tr class="about__tr">
-                                <th class="about__th">Размер</th>
-                                <td class="about__td">Средняя (11-25кг)</td>
-                            </tr>
-                            <tr class="about__tr about__tr_bg">
-                                <th class="about__th">Основные черты</th>
-                                <td class="about__td">Очень преданная, Дружелюбная,
-                                    Подходит для охоты, Мало лает</td>
-                            </tr>
-                            <tr class="about__tr">
-                                <th class="about__th">Частые заболевания</th>
-                                <td class="about__td">Глухота, Паралич гортани </td>
-                            </tr>
-                            <tr class="about__tr about__tr_bg">
-                                <th class="about__th">Интеллект</th>
-                                <td class="about__td">45%</td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <template id="template">
+                <h1 class="about__h1">Айну</h1>
+                <div class="breadcrumbs">Каталог товаров / Собачки / Айну</div>
+                <div class="about__img-cont"><img src="../img/dogs/dog-1.png" alt="dog" class="about__img"></div>
+                <div class="about__info">
+                    <span class="about__h">Характеристика Айну</span>
+                    <div class="about__features">
+                        <table class="about__table">
+                            <tbody class="about__tbody">
+                                <tr class="about__tr about__tr_bg">
+                                    <th class="about__th">Тип</th>
+                                    <td class="about__td type">Охотничьи, Компаньоны</td>
+                                </tr>
+                                <tr class="about__tr">
+                                    <th class="about__th">Размер</th>
+                                    <td class="about__td size">Средняя (11-25кг)</td>
+                                </tr>
+                                <tr class="about__tr about__tr_bg">
+                                    <th class="about__th">Основные черты</th>
+                                    <td class="about__td">Очень преданная, Дружелюбная,
+                                        Подходит для охоты, Мало лает</td>
+                                </tr>
+                                <tr class="about__tr">
+                                    <th class="about__th">Частые заболевания</th>
+                                    <td class="about__td">Глухота, Паралич гортани </td>
+                                </tr>
+                                <tr class="about__tr about__tr_bg">
+                                    <th class="about__th">Интеллект</th>
+                                    <td class="about__td">45%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="about__cost-name">Стоимость</div>
+                    <div class="about__cost">12 000₽</div>
+                    <div class="about_btns-cont">
+                        <button class="btn about_btn-take">Забрать</button>
+                        <button class="about_btn-addtocart">Добавить в корзину</button>
+                    </div>
                 </div>
-                <div class="about__cost-name">Стоимость</div>
-                <div class="about__cost">12 000₽</div>
-                <div class="about_btns-cont">
-                    <button class="btn about_btn-take">Забрать</button>
-                    <button class="about_btn-addtocart">Добавить в корзину</button>
-                </div>
-            </div>
+            </template>
+
         </main>
     </div>
+    <script type="module" src="../js/storage.js"></script>
+    <script type="module" src="../js/aboutInfo.js"></script>
+    <script type="module" src="../js/json.js"></script>
+
 </body>
 
 </html>
