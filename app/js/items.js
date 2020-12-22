@@ -49,8 +49,6 @@ function addToArray(e) {
     if (e.target.className == 'btn-in-cart')
         cart.addToCart(
             getDataItem(e.target.parentNode.children[1].textContent));
-    console.log(cart.cartArray);
-    console.log(getDataItem(e.target.parentNode.children[1].textContent));
 }
 
 itemsCont.addEventListener("click", (e) => addToArray(e))
