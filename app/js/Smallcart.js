@@ -1,3 +1,4 @@
+import { addItemToLocalStorage } from './storage.js'
 export const cartBtnInHeader = document.querySelector('.header__ul').children[3].children[0];
 
 
@@ -31,7 +32,7 @@ export class SmallCart {
     addToLocalStorage(arr) {
         localStorage.clear();
         arr.forEach((item, id) => {
-            localStorage.setItem(`${id} obj`, JSON.stringify(item));
+            addItemToLocalStorage(JSON.stringify(item), id);
         })
     }
 
