@@ -1,4 +1,5 @@
-import { currentName, getDataItem } from './storage.js'
+import { currentName, getDataItem, sendHttpRequest } from './storage.js'
+
 
 let template = document.querySelector('#template');
 let main = document.querySelector('.about');
@@ -33,6 +34,10 @@ class About {
     }
 }
 
-let about = new About();
-about.toHtml(about.createElement(about.getDataFromStorage()));
-console.log(about.getDataFromStorage());
+sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData => {
+    let about = new About();
+    about.toHtml(about.createElement(about.getDataFromStorage()));
+    console.log(about.getDataFromStorage());
+
+});
+

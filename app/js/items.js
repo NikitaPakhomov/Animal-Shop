@@ -1,14 +1,22 @@
 import { filtering } from "./filter.js"
-import { currentData, filteredData, getDataItem, setcurrentName } from './storage.js'
+import { currentData, filteredData, getDataItem, setcurrentName, sendHttpRequest } from './storage.js'
 import { data } from './json.js';
 import { cart } from './cart.js';
 
+let items;
 let itemsCont = document.querySelector('.cards');
 let itemTemplate = itemsCont.querySelector('#template');
+
 export let foundCount = document.querySelector('#filters__count');
-toHTML(7, filteredData);
 
-
+sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData => {
+    toHTML(7, filteredData);
+    items = document.querySelectorAll('.cards__item');
+    console.log(items);
+    items.forEach((item) => {
+        item.addEventListener("click", (e) => addToArray(e));
+    })
+});
 
 export function clearBoard() {
     itemsCont.innerHTML = "";
@@ -51,10 +59,10 @@ function addToArray(e) {
         cart.addToCart(
             getDataItem(e.target.parentNode.children[1].textContent));
     } else if (e.currentTarget.className == 'cards__item') {
+        console.log('1');
         setcurrentName(e.currentTarget.children[1].textContent);
         toNextPage(e, e.currentTarget.children[1].textContent);
     }
-
 }
 
 
@@ -64,8 +72,5 @@ function toNextPage(e, name) {
 }
 
 
-itemsCont.addEventListener("click", (e) => addToArray(e));
-let items = document.querySelectorAll('.cards__item');
-items.forEach((item) => {
-    item.addEventListener("click", (e) => addToArray(e));
-})
+
+
