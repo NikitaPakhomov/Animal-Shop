@@ -43,5 +43,19 @@ export function getDataItem(name) {
         return data.name == name;
     })[0];
 }
+export function addItemToLocalStorage(item, id) {
+    localStorage.setItem(`${id} obj`, JSON.stringify(item))
+}
+export function clearLocalStorage() {
+    localStorage.clear();
+}
+export function deleteItemFromLocalStorage(item) {
+    localStorage.removeItem(`${item}`);
+}
+export function getDataFromLocaleStorage(id) {
+    return JSON.parse(localStorage.getItem(`${id} obj`));
+}
+
+
 
 export { filteredData };

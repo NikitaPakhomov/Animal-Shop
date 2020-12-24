@@ -1,7 +1,7 @@
 import { filter, filteredDataCount, filtersActive, filterSize } from "./filter.js";
 import { currentData } from './storage.js';
 import { foundCount, reshuffle } from './items.js';
-import { cart } from './cart.js';
+import { smallCart } from './Smallcart.js';
 
 
 export const filtersPopup = document.querySelector('.filters__popup');

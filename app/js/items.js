@@ -1,7 +1,7 @@
 import { filtering } from "./filter.js"
 import { currentData, filteredData, getDataItem, setcurrentName, sendHttpRequest } from './storage.js'
 import { data } from './json.js';
-import { cart } from './cart.js';
+import { smallCart } from './Smallcart.js';
 
 let items;
 let itemsCont = document.querySelector('.cards');
@@ -12,7 +12,6 @@ export let foundCount = document.querySelector('#filters__count');
 sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData => {
     toHTML(7, filteredData);
     items = document.querySelectorAll('.cards__item');
-    console.log(items);
     items.forEach((item) => {
         item.addEventListener("click", (e) => addToArray(e));
     })
@@ -56,7 +55,7 @@ export function reshuffle() {
 function addToArray(e) {
     if (e.target.className == 'btn-in-cart') {
         e.stopPropagation()
-        cart.addToCart(
+        smallCart.addToCart(
             getDataItem(e.target.parentNode.children[1].textContent));
     } else if (e.currentTarget.className == 'cards__item') {
         console.log('1');
