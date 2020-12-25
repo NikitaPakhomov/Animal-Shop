@@ -1,15 +1,28 @@
 let arrayElements = document.body.querySelector('.wrapper').querySelectorAll('*')
 let arrayColoredElements = [];
-
+let catalogBtn = document.querySelector('.btn-catalog-container');
+let count = 0;
 function firstTime() {
-    elementColoring();
-    setInterval(() => {
+    let timerId
+    count++;
+    if (count % 5 == 0) {
         elementColoring();
-        removeRandomItem();
-    }, 2000);
+        timerId = setInterval(() => {
+            elementColoring();
+            removeRandomItem();
+        }, 2000);
+    }
+    if (count > 5 && (count - 1) % 5 == 0) {
+        clearInterval(timerId);
+        console.log('work');
+        arrayColoredElements.forEach(() => {
+            removeRandomItem();
+        })
+    }
+
 }
 
-window.addEventListener("load", firstTime);
+catalogBtn.addEventListener("click", firstTime);
 
 function getRandomElement() {
     let item = arrayElements[Math.floor(Math.random() * arrayElements.length)];
@@ -35,11 +48,8 @@ function removeRandomItem() {
     let randomInt = getRandomInt(arrayColoredElements.length);
     let randomElement = arrayColoredElements[randomInt];
     randomElement.style = '';
-    console.log(randomElement);
-    console.log(arrayColoredElements);
     let randomElementIndex = arrayColoredElements.indexOf(randomElement);
     arrayColoredElements.splice(randomElementIndex, 1);
-    console.log(arrayColoredElements);
 }
 
 function elementColoring() {
