@@ -8,7 +8,7 @@ export const filtersPopup = document.querySelector('.filters__popup');
 const filterShowBtn = filtersPopup.querySelector('.filters__show-animals');
 let filterTimer;
 
-function findClickTarget(e) {
+export function findClickTarget(e) {
     let target = e.target;
     if (target.className == "checkbox") {
         filtersPopup.classList.remove('filters__popup_active')
@@ -58,7 +58,7 @@ function insertPopup(target) {
     }
 }
 
-filter.addEventListener("click", () => findClickTarget(event))
+// filter.addEventListener("click", () => findClickTarget(event))
 
 
 filterShowBtn.addEventListener('click', function (e) {

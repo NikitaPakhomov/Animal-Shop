@@ -1,9 +1,9 @@
-import { filtersPopup } from './filterPopup.js';
+import { filtersPopup, findClickTarget } from './filterPopup.js';
 import { currentData, filteredData, setCurrentData } from './storage.js'
 
 export const filter = document.querySelector('.filters');
 export const filterSize = document.querySelector('.filters__size').querySelector('.filters__inputs');
-
+export const filterSizeInputs = document.querySelector('.filters__size').querySelector('.filters__inputs').querySelectorAll('.filters__input');
 const filterTypes = document.querySelector('.filters__types').querySelector('.filters__ul');
 const filterFeatures = document.querySelector('.filters__main-features').querySelector('.filters__ul');
 
@@ -26,6 +26,7 @@ function filterByTypes(e) {
         } else {
             filterActiveTypes.splice(filterActiveTypes.indexOf(target.value), 1);
         }
+        findClickTarget(event)
     }
     filtering();
 }
@@ -38,6 +39,7 @@ function filterByFeatures(e) {
         } else {
             filterActiveFeatures.splice(filterActiveFeatures.indexOf(target.value), 1);
         }
+        findClickTarget(event)
     }
     filtering();
 }
@@ -51,6 +53,7 @@ function filterBySize(e) {
         if (target.name == 'filters__to') {
             max = target.value;
         }
+        findClickTarget(event)
     }
     filtering();
 }
@@ -74,7 +77,7 @@ export function filtering() {
             return true;
         }))
     }
-    if (max && min) {
+    if (max || min) {
         setCurrentData(currentData.filter(data => {
             let cost = +data.cost.replace(/\s/g, '');
             if (min > cost) {
@@ -93,6 +96,7 @@ export function filtering() {
         }))
     }
     filteredDataCount = currentData.length;
+
 }
 
 
@@ -100,4 +104,6 @@ export function filtering() {
 
 filterTypes.addEventListener("change", () => filterByTypes(event));
 filterFeatures.addEventListener("change", () => filterByFeatures(event));
-filterSize.addEventListener("change", () => filterBySize(event));
+filterSizeInputs[0].addEventListener("change", () => filterBySize(event));
+filterSizeInputs[1].addEventListener("change", () => filterBySize(event));
+console.dir(filterSizeInputs[0]);

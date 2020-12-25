@@ -5,12 +5,8 @@ const orderCont = document.querySelector('.cart__orders');
 const cost = document.querySelectorAll('.cart__cost')[2];
 const count = document.querySelector('.cart__count');
 let deleteBtn = orderCont.querySelector('.trash-btn');
-
-deleteAllBtn.addEventListener('click', () => {
-    clearLocalStorage();
-    bigCart.toHTML();
-});
-
+const closeBtn = document.querySelector('.close');
+console.log(closeBtn);
 
 
 export class BigCart {
@@ -66,6 +62,9 @@ export class BigCart {
         deleteItemFromLocalStorage(key);
         bigCart.toHTML();
     }
+    toHome() {
+        window.location.href = `../index.html`;
+    }
 }
 
 
@@ -76,6 +75,12 @@ bigCart.toHTML();
 window.addEventListener("storage", () => {
     bigCart.toHTML();
 });
+deleteAllBtn.addEventListener('click', () => {
+    clearLocalStorage();
+    bigCart.toHTML();
+});
 
-console.log(localStorage.key(0));
+closeBtn.addEventListener('click', bigCart.toHome);
+
+
 

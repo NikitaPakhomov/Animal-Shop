@@ -11,10 +11,6 @@ export let foundCount = document.querySelector('#filters__count');
 
 sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData => {
     toHTML(7, filteredData);
-    items = document.querySelectorAll('.cards__item');
-    items.forEach((item) => {
-        item.addEventListener("click", (e) => addToArray(e));
-    })
 });
 
 export function clearBoard() {
@@ -27,6 +23,10 @@ export function toHTML(count, array) {
         let elem = createElement(array[i])
         itemsCont.appendChild(elem);
     }
+    items = document.querySelectorAll('.cards__item');
+    items.forEach((item) => {
+        item.addEventListener("click", (e) => addToArray(e));
+    })
 }
 
 export function createElement({ img, name, cost }) {

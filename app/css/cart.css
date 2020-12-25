@@ -9,7 +9,9 @@
 }
 
 .cart-cont {
-    max-width: 650px;
+    width: 100%;
+    max-width: 1232px;
+    margin: 0 auto;
 }
 
 .cart {
