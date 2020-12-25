@@ -1,4 +1,6 @@
-import { currentName, getDataItem, sendHttpRequest } from './storage.js'
+import { currentName, getDataItem, sendHttpRequest } from './storage.js';
+import { addItemToLocalStorage } from './storage.js';
+import { smallCart } from './Smallcart.js'
 
 
 let template = document.querySelector('#template');
@@ -38,6 +40,19 @@ sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData 
     let about = new About();
     about.toHtml(about.createElement(about.getDataFromStorage()));
     console.log(about.getDataFromStorage());
-
+    const addToCartBtn = document.querySelector('.about_btn-addtocart');
+    let num = localStorage.length;
+    addToCartBtn.addEventListener('click', () => {
+        addItemToLocalStorage(JSON.stringify(about.getDataFromStorage()), localStorage.length);
+        smallCart.calculating();
+        smallCart.htmlСhangeSmallCart();
+    });
+    smallCart.calculating();
+    smallCart.htmlСhangeSmallCart();
 });
+window.addEventListener("storage", () => {
+    smallCart.calculating();
+    smallCart.htmlСhangeSmallCart();
+});
+
 

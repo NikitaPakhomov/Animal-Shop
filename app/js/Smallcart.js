@@ -1,27 +1,33 @@
-import { addItemToLocalStorage } from './storage.js'
+import { addItemToLocalStorage, sendHttpRequest, getDataFromLocaleStorage } from './storage.js'
 export const cartBtnInHeader = document.querySelector('.header__ul').children[3].children[0];
 
 
 cartBtnInHeader.addEventListener('click', () => {
     window.location.href = `../components/cart.html`;
-    htmlСhangeSmallCart()
+    htmlСhangeSmallCart();
 })
 
 
 
 
 export class SmallCart {
-    constructor(count, cost) {
-        this.count = count;
-        this.cost = cost;
+    constructor() {
+        this.cost = 0;
+        this.count = +localStorage.getItem("0");
     }
-
     cartArray = [];
     calculating() {
-        this.count = this.cartArray.length;
+        this.count = 0;
         this.cost = 0;
-        for (let i = 0; i < this.count; i++) {
-            this.cost += Number(this.cartArray[i].cost.replace(/\s/g, ''));
+        for (let i = 1; i < localStorage.length; i++) {
+            this.count += +getDataFromLocaleStorage(localStorage.key(i)).count;
+        }
+        if (this.count > 0) {
+            for (let i = 1; i < localStorage.length; i++) {
+                if (localStorage[localStorage.key(i)]) {
+                    this.cost += Number(JSON.parse(JSON.parse(localStorage[localStorage.key(i)])).cost.replace(/\s/g, '')) * getDataFromLocaleStorage(localStorage.key(i)).count;
+                }
+            }
         }
     }
 
@@ -29,19 +35,18 @@ export class SmallCart {
         cartBtnInHeader.children[1].textContent = `Корзина (${this.count})`;
         cartBtnInHeader.children[2].textContent = `${this.cost} руб.`;
     }
-    addToLocalStorage(arr) {
-        localStorage.clear();
-        arr.forEach((item, id) => {
-            addItemToLocalStorage(JSON.stringify(item), id);
-        })
+    addToLocalStorage(elem) {
+        addItemToLocalStorage(JSON.stringify(elem), +localStorage.getItem("0") + 1);
+
     }
 
     addToCart(elem) {
         this.cartArray.push(elem);
         this.count++;
+        this.addToLocalStorage(elem);
         this.calculating();
         this.htmlСhangeSmallCart();
-        this.addToLocalStorage(this.cartArray);
+
     }
 
 
@@ -49,5 +54,14 @@ export class SmallCart {
 
     }
 }
+export let smallCart;
 
-export let smallCart = new SmallCart(0, 0);
+sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData => {
+    smallCart = new SmallCart();
+
+    smallCart.htmlСhangeSmallCart();
+});
+window.addEventListener("storage", () => {
+    smallCart.calculating();
+    smallCart.htmlСhangeSmallCart();
+});

@@ -45,7 +45,6 @@ function filterByFeatures(e) {
 }
 
 function filterBySize(e) {
-    console.log('work');
     let target = e.target;
     if (target.tagName == 'INPUT') {
         if (target.name == 'filters__from') {
@@ -78,7 +77,7 @@ export function filtering() {
             return true;
         }))
     }
-    if (max || min) {
+    if (min) {
         setCurrentData(currentData.filter(data => {
             let size = +data.size.replace(/\s/g, '');
             if (min > size) {
@@ -87,6 +86,8 @@ export function filtering() {
                 return true;
             }
         }))
+    }
+    if (max) {
         setCurrentData(currentData.filter(data => {
             let size = +data.size.replace(/\s/g, '');
             if (max < size) {

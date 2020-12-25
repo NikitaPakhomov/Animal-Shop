@@ -1,6 +1,5 @@
 import { filtering } from "./filter.js"
 import { currentData, filteredData, getDataItem, setcurrentName, sendHttpRequest } from './storage.js'
-import { data } from './json.js';
 import { smallCart } from './Smallcart.js';
 
 let items;
@@ -10,7 +9,7 @@ let itemTemplate = itemsCont.querySelector('#template');
 export let foundCount = document.querySelector('#filters__count');
 
 sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData => {
-    toHTML(7, filteredData);
+    toHTML(7, responseData);
 });
 
 export function clearBoard() {
@@ -54,11 +53,10 @@ export function reshuffle() {
 
 function addToArray(e) {
     if (e.target.className == 'btn-in-cart') {
-        e.stopPropagation()
+        e.stopPropagation();
         smallCart.addToCart(
             getDataItem(e.target.parentNode.children[1].textContent));
     } else if (e.currentTarget.className == 'cards__item') {
-        console.log('1');
         setcurrentName(e.currentTarget.children[1].textContent);
         toNextPage(e, e.currentTarget.children[1].textContent);
     }
