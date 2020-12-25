@@ -58,10 +58,11 @@ export let smallCart;
 
 sendHttpRequest('GET', 'http://localhost:3000/api/dogs.json').then(responseData => {
     smallCart = new SmallCart();
-
+    smallCart.calculating();
     smallCart.htmlСhangeSmallCart();
 });
 window.addEventListener("storage", () => {
     smallCart.calculating();
     smallCart.htmlСhangeSmallCart();
 });
+
