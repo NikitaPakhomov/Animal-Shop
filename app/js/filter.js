@@ -45,6 +45,7 @@ function filterByFeatures(e) {
 }
 
 function filterBySize(e) {
+    console.log('work');
     let target = e.target;
     if (target.tagName == 'INPUT') {
         if (target.name == 'filters__from') {
@@ -53,7 +54,7 @@ function filterBySize(e) {
         if (target.name == 'filters__to') {
             max = target.value;
         }
-        findClickTarget(event)
+        findClickTarget(event);
     }
     filtering();
 }
@@ -79,16 +80,16 @@ export function filtering() {
     }
     if (max || min) {
         setCurrentData(currentData.filter(data => {
-            let cost = +data.cost.replace(/\s/g, '');
-            if (min > cost) {
+            let size = +data.size.replace(/\s/g, '');
+            if (min > size) {
                 return false;
             } else {
                 return true;
             }
         }))
         setCurrentData(currentData.filter(data => {
-            let cost = +data.cost.replace(/\s/g, '');
-            if (max < cost) {
+            let size = +data.size.replace(/\s/g, '');
+            if (max < size) {
                 return false;
             } else {
                 return true;
@@ -104,6 +105,6 @@ export function filtering() {
 
 filterTypes.addEventListener("change", () => filterByTypes(event));
 filterFeatures.addEventListener("change", () => filterByFeatures(event));
-filterSizeInputs[0].addEventListener("change", () => filterBySize(event));
-filterSizeInputs[1].addEventListener("change", () => filterBySize(event));
+filterSizeInputs[0].addEventListener("input", () => filterBySize(event));
+filterSizeInputs[1].addEventListener("input", () => filterBySize(event));
 console.dir(filterSizeInputs[0]);

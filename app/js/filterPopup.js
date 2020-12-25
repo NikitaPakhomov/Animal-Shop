@@ -27,13 +27,17 @@ export function findClickTarget(e) {
     if (target.className == "filters__input") {
         filtersPopup.classList.remove('filters__popup_active')
         clearTimeout(filterTimer);
-        if (!target.checked) {
+        if (target.value) {
             filterTimer = setTimeout(() => insertPopup(filterSize), 3000);
-            filtersActive.push(filterSize);
+            // filtersActive.push(filterSize);
+            filtersActive.push(target);
         } else {
             filtersPopup.classList.remove('filters__popup_active')
-            if (filtersActive.includes(filterSize)) {
-                filtersActive.splice(filtersActive.indexOf(filterSize), 1);
+            // if (filtersActive.includes(filterSize)) {
+            //     filtersActive.splice(filtersActive.indexOf(filterSize), 1);
+            // }
+            if (filtersActive.includes(target)) {
+                filtersActive.splice(filtersActive.indexOf(target), 1);
             }
             filterTimer = setTimeout(() => insertPopup(filtersActive[filtersActive.length - 1]), 3000);
         }
